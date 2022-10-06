@@ -1,0 +1,209 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margine=1in]{geometry}
+\newtheorem{theorem}{proof}
+
+\title{CSC236 Lecture Notes}
+\author{Amirali Tolooei}
+\date{May 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 1: Functions}
+
+Power sets (B) are sets that contain all the subsets of A
+
+\subsection{Functions mapping}
+
+f: A $\rightarrow$ B is equivalent to "f is a function from A to B"
+with A as the domain and B as the subdomain\\ \\
+Everything in A is mapped to something in B, but not everything in B needs to be mapped to A. \\ \\
+We can fix a function by changing the subdomain. \\ \\
+
+\subsection{Injective Functions} 
+A function is called injective if nothing in the codomain is hit more than once. Formally, the defenitions states that A function f:A $\rightarrow$ B is injective if: \\ \\
+$\forall x, y \in A. (x \neq y \Rightarrow f(x) \neq f(y))$ \\ \\
+Aka "If the inputs are different, the outputs are different".\\
+Sometimes, the equivalent contrapositive is easier to work with:\\ \\
+$\forall x, y \in A. (f(x) = f(y) \Rightarrow x = y$ \\ \\
+
+\textbf{Pigeonhole Principal} \\
+If there are m pigeons and n pigeonholes, not matter how we assign pigeons to pigeonholes, at least on pigeonhole will have at least $\lceil m/n \rceil$ pigeons!! (Notation: $\lceil x \rceil$ rounds x up to the nearest integer). \\ \\
+Example: Infinite number room hotel with infinite people. Map f($a_i$) = i\\
+But what if a new bus with more infinite people comes. How do u rearrange it. It would be:\\ \\
+f($a_i$) = 2i and f($b_i$) = 2i + 1 \\
+
+\subsection{Surjective Functions}
+A function is surjective if everything in the codomain is hit. \\
+Formally f: A $\rightarrow$ B is surjective if: \\ \\
+$\forall b \in B. \exists a \in A. (f(a) = b)$ \\ \\
+
+\subsection{Bijective Functions}
+A function is bijective if everything in the codomain is hit exactly once. Formally: \\ \\
+f: A $\rightarrow$ B is bijective if f is both injective and surjective
+
+Injective is 1 or 0 times, Surjective is at least 1 times, and Bijective is exatly 1 time. \\ \\
+
+\textbf{Cantors Theorem}\\
+For any set A, there is no surjection between A and $_Q(A)$. Because the power set is always bigger than the set itself, and since the codomain is bigger than the domain, it cannot possibly be subjective. \\ \\
+For a proof, let f: A $\rightarrow$ $_Q(A)$ be any function\\
+Let $D = \{a \in A : a \notin f(a)\}$ and note that D $\subset$ A, and hence D $\in$ $_Q(A)$. To show f is not surjective, we'll show that in particular, there is no a $\in$ A such that f(a) = D. \\ \\
+
+By contradiction, assume $D = f(a)$ for some a $\in$. There are two possible cases. \\ \\
+If $a \in D$, then $a \notin f(a)$ by the definition of D. But if f(a) = D, so $a \notin D$, which is again a contradiction \\ \\
+Otherwise, $a \notin D$, then $a \in f(a)$ but f(a) = D by assumption, so $a \in D$. Contradiction. \\
+In both cases there is a contradiction, so it is not surjective.
+\\
+\section{Lecture 2: Binary Relations}
+A binary relation $R$ over a set $A$ is a way to compare pairs of elements of $A$. For any elements $a, b \in A,$\\
+If $a$ relates to $b$ under R, we write aRb \\
+if a does not relate to b, we write $a\not Rb$
+\subsection{The Essence of $<$}
+$\forall x \in \mathbf{N} x \not < x$\\
+$\forall a, b, c    a<b \wedge b < c \Rightarrow a < c$ \\
+$\forall a \in \mathbf{N}, a \not < a$\\
+irreflexible: No self loops\\
+asymmetric: if theres on gone one way, the other cannot go the other way\\
+transitive: \\
+connected: \\
+\subsection{Strict Orders}
+Let $R$ be a relation over a set $A$. $R$ is strict if it is \\
+\section{graphs}
+\subsection{Matching}
+
+\subsection{Trees}
+G is connect if for every pair of distinct vertices u, v, there is some path from u to v. \\
+G is acyclic if there are no cycles in G.\\
+G is called a tree if G is both connected and acyclic\\ \\
+If G has many edges, it is more likely to be connect, but also more likely to have a cycle, If G has fewer, it more likely to acylic but less connected, trees are the perfect combination\\ \\
+Trees are minimally connected graph, and maximally acyclic graphs, meaning there's no cycle but adding one edge makes it a cycle, and it is fully connected, but removing an edge will make it disconnected.\\ \\
+\subsubsection{proof of adding an edge to a tree makes it cyclic}
+
+\textbf{Proof}\\
+Let G be tree. \\
+Let ${u, v}$ be any edge not in G.\\
+Let $G^1 = G$ with ${u, v}$ added. \\
+by contr. assume $G^1$ is still acyclic \\
+$\Rightarrow G^1$ is acyclic and connect \\
+$\Rightarrow G^1$ is a tree \\
+$\Rightarrow G^1$ is min connected \\ \\ \\
+If G is minimally connected, then it is also maximally acyclic, and it is also a tree! \\
+\section{Induction}
+Induction is used to prove statements of the following form: \\
+$\forall n \in \mathbf{N}. (P(n))$\\
+Induction is super useful when analyzing the correctness of an algorithm or runtime\\
+$(P(0) \land \forall k \in \mathbf{N} (P(k) \Rightarrow P(k + 1))) \Rightarrow \forall n \in \mathbf{N}. (P(n))$ \\
+"If I can show that the first domino falls, and i can shot what for any domino, if that domino falls, the next one falls, every domino falls".\\
+\subsection{Perfect Binary}
+$\forall n \in \mathbf{N} (2^0 + 2^1 + ... + 2^n = 2^{n+1} -1)$\\
+Base case: $2^0 = 1 = 2^{0 + 1} - 1$\\
+Inductive step. Let $k \in \mathbf{N}$ be any natural number. Assume $2^0 + 2^1 + ... + 2^n = 2^{n+1} -1 $\\
+WTS $2^0 + 2^1 + ... + 2^k = 2^{(k+1) + 1} -1$\\ \\
+
+$\forall n \in \mathbf{N}.(n^3 - n + 3)$ is divisble by 3 \\
+Base case: Take n = 0, we get $0^3 - 0 +3 = 3$ which is divisble by 3.\\
+Inductive step: let $k \in \mathbf{N}$ assume $k^3 - k +3 $ is disible by 3. Namely let $k^3 - k + 3 = 3p$ for some $p \in \mathbf{N}$\\
+WTS $(k + 1)^3 - (k + 1) + 3  = 3p$\\
+$k^3 + 3k^2 + 3k + 1 - k - 1 + 3$\\
+$3p + 3k^2 + 3k$ = $3(p + k^2 + k)$\\ \\
+$\forall n \in \mathbf{N}$ the units digit of $7^n$ is 1, 3, 7, or 9.\\
+Base case: Take n = 0, we get $7^0 = 1$ which has the unit digit of 1\\
+Inductive step \\ \\
+
+
+\section{Recursion}
+\subsection{Explicit Examples}
+Example: F(n) = 4 if n =0, 3 + F(n - 1) if n $\geq$ 1\\
+Explicit = 3n + 4\\
+
+Example: \\
+F(n) = 0 if n = 0, F(n) = 1 if n = 1, F(n) = 2F(n - 1) - F(n - 2) + 2 if n $\geq$ 2
+\\
+F(n) = $n^2$
+\\
+\subsection{Asymptotic Review}
+Big O is when for some k and all n greater than some threshold, $f(n) \leq k \cdot g(n)$\\
+Big Omega is when for some k and all n greater than some threshold, $f(n) \geq k \cdot g(n)$ \\
+Big theta is when there exists $k_1, k_2$ such that $k_1 \cdot g(n) \leq f(n) \leq k_2 \cdot g(n)$\\
+Little O is the same as asymptotiticly dominated changing for some k to all k and $\leq$ to $<$\\
+Little Onega is the same asymptotically submissive changing for some k to all k and $\geq$ to $\>$\\
+
+$\prec$ = Little O, $\preceq$ = Big O, $\approx$ = Theta, $\succeq$ = Big Omega, $\succ $ = Little Omega.\\
+
+ In this class, when working with log we work with $log_2$\\
+\\
+T(n) = T(n-1) + T(n-2)
+\\
+$Fib(n) = \frac{\varphi^n}{\sqrt{5}}$\\usepackage{}\\
+\section{Recurrences 2}
+\subsection{New approach to recurrences}
+Two weaknesses to last times approach was that it had guessing and slow proofs which were not intuitive.\\
+Today's approach will remove technical details without sacrificing precision, make better guesses, and streamlines the process for solving certain types of recurrences.\\
+When we are trying to prove big of T and omega of T, we can assume that the base case holds and skip it in our proofs, and because we only care about the asymptotics, we can choose constants to add or multiply to $f$. Since the base case is a constant, there's always a choice that makes it work.\\
+Replacing the floor or roof of n/2 with n/2 has a negligible impact on the asymptotics.\\ \\
+The substitution method for solving recurrences is proof by complete induction with the technical simplifications applied. \\
+The substitution method:
+\begin{enumerate}
+    \item Remove all the floors and ceilings from the recurrence $T$
+    \item Make a guess for $f$ such that $T(n) = O(f(n))$.
+    \item Write out the recurrence: $T(n) = ...$
+    \item Whenever $T(k)$ appears on the RHS of the recurrence, \textit{substitute} it with $cf(k)$
+    \item Try to prove $T(n) \leq cf(n)$.
+    \item Pick $c$ to make your analysis work!
+\end{enumerate}
+If u want to show T is the theta of f, you also need to show that $T(n) = \omega (f(n))$. This is the same as steps 3-6 where the $\leq$ in step 5 is replaced with a $geq$. The constant c for showing t is omega of f can be different to the constant trying to show T is big o of f\\
+
+The recurence of Merge sort is $T_{MS} (n) = 2T_{MS} (\frac{n}{2}) + T_{Merge} (n)$\\
+
+Recursion trees are good for computing the runtime directly.\\
+
+\subsection{Standard for mrecurrences}
+The standard form is writen as $T(n) = aT(n/b) + f(n)$\\
+\begin{enumerate}
+    \item a is the branching factor of the tree, how many children does each node have? 
+    \item b is the reduction factor, how much smaller is each level in comparison to the previous level.
+    \item f(n) is the non-recursive work, work done outside the recursive call
+\end{enumerate}
+What are the specifics?:
+\begin{enumerate}
+    \item What is the height of the tree? | $\log_b(n)$
+    \item What is the number of vertices at the height of $h$? | $a ^h$
+    \item Total non-recursive work at level $h$? | $f(n)$ and 
+\end{enumerate}
+\subsection{master theorem}
+If u have a recurence of the standard form:
+\begin{enumerate}
+    \item Leaf Heavy: $f(n) = O(n^{log_b(a)-\epsilon})$ for some constant $\epsilon > 0$
+    \item Balanced: $f(n) = \theta(n^{log_b(a)}$
+    \item Root heavy: $f(n) = \omega(n^{log_b(a) + \epsilon})$ for some constant $\epsilon > 0$, and $af(n/b) \leq cf(n)$ for some constant $c < 1$ for all sufficiently large n.
+\end{enumerate}
+
+\section{Correctness of recursions}
+
+Binary search: Case 1: 
+
+$P(n)$: For all lists $l \in List[\mathbf{N}]$ and $t \in \mathbf{N}$, if $b - a = n$, then $\texttt{bin_search}(l, t, a, b)$ returns None if $t$ is not in $l[:b]$ and the index of t in l otherwise. Claim: $\forall n \in \mathbf{N}. P(n)$.
+
+\\
+
+\section{Correctness 2}
+
+General Strategy for loop proofs:
+\begin{list}
+    \item Initialization: Show that loop invariant is true at the start of the loop (Base case)
+    \item Maintenance: Show that if the loop invariant is true at the start of any iteration, it is also true at the start of the next iteration. (Inductive step)
+    \item Termination: Show that the loop terminates and that when the loop terminates, the loop invariant implies what we want.
+\end{list}
+\\
+
+\section{A model of Computation}
+A single DFA corresponds to what we think of as a program.\\
+The input of a DFA is a string $w \in \sigma*$ and the output is an accept a single ion or a rejection.
+
+
+
+
+
+\end{document}
